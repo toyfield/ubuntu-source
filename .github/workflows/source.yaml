@@ -1,0 +1,42 @@
+name: show ubuntu source
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  show-source:
+    runs-on: [ubuntu-latest, ubuntu-22.04-arm]
+    steps:
+      - name: Show Ubuntu Source Information
+        run: |
+          echo "=== Ubuntu System Information ==="
+          lsb_release -a
+          
+          echo -e "\n=== OS Release Info ==="
+          cat /etc/os-release
+          
+          echo -e "\n=== System Version ==="
+          uname -a
+          
+          echo -e "\n=== Available Package Sources ==="
+          cat /etc/apt/sources.list
+          
+          echo -e "\n=== Additional Sources ==="
+          if [ -d /etc/apt/sources.list.d ]; then
+            ls -la /etc/apt/sources.list.d/
+            for file in /etc/apt/sources.list.d/*.list; do
+              if [ -f "$file" ]; then
+                echo "--- $file ---"
+                cat "$file"
+              fi
+            done
+          fi
+          
+          echo -e "\n=== Package Cache Info ==="
+          apt list --installed | head -20
+          
+          echo -e "\n=== Available Updates ==="
+          apt list --upgradable | head -10
