@@ -27,7 +27,7 @@ jobs:
           echo -e "\n=== Additional Sources ==="
           if [ -d /etc/apt/sources.list.d ]; then
             ls -la /etc/apt/sources.list.d/
-            for file in /etc/apt/sources.list.d/*.list; do
+            for file in /etc/apt/sources.list.d/*; do
               if [ -f "$file" ]; then
                 echo "--- $file ---"
                 cat "$file"
