@@ -6,6 +6,10 @@ on:
       - main
   workflow_dispatch:
 
+concurrency:
+  group: ubuntu-source
+  cancel-in-progress: true
+
 jobs:
   show-source:
     runs-on: [ubuntu-latest]
