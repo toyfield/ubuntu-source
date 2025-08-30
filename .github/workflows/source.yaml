@@ -12,7 +12,10 @@ concurrency:
 
 jobs:
   show-source:
-    runs-on: [ubuntu-latest]
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Show Ubuntu Source Information
         run: |
