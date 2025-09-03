@@ -41,6 +41,9 @@ jobs:
               fi
             done
           fi
+
+          echo -e "\n---/etc/apt/apt-mirrors.txt----"
+          cat /etc/apt/apt-mirrors.txt
           
           echo -e "\n=== Package Cache Info ==="
           apt list --installed | head -20
