@@ -50,3 +50,12 @@ jobs:
           
           echo -e "\n=== Available Updates ==="
           apt list --upgradable | head -10
+      - name: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.os }}-source
+          path: |
+            /etc/apt/apt-mirrors.txt
+            /etc/apt/sources.list
+            /etc/apt/sources.list.d/
+          retention-days: 7
